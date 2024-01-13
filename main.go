@@ -14,6 +14,7 @@ import (
 	"brimstone/pkg/config"
 	"brimstone/pkg/middleware"
 	"brimstone/routes"
+	"brimstone/routes/api"
 )
 
 func main() {
@@ -32,8 +33,13 @@ func main() {
 		g.JSON(404, gin.H{"code": 404, "msg": fmt.Sprintf("not found '%s:%s'", g.Request.Method, g.Request.URL.Path)})
 	})
 	// 注册路由处理函数
-	router.GET("/ping", routes.PingRouter)
+	router.GET("/health", routes.HealthRouter)
 	router.GET("/version", routes.VersionRouter)
+
+	apiGroup := router.Group("/api")
+	{
+		apiGroup.GET("/ping", api.PingRouter)
+	}
 
 	utils.ShowTip(currentTime, port)
 	// 运行服务器，监听指定端口
