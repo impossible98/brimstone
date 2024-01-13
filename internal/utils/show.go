@@ -6,18 +6,16 @@ import (
 	"time"
 )
 
-var port = GetPort()
-
-func ShowTip(time time.Time) {
+func ShowTip(time time.Time, port string) {
 	clearScreen()
 	fmt.Println()
 	fmt.Println(tip(time))
 	fmt.Println()
-	fmt.Println(localNetwork())
+	fmt.Println(localNetwork(port))
 	ip, err := getLocalIPv4()
 	if err != nil {
 	} else {
-		fmt.Println(PublicNetwork(ip))
+		fmt.Println(PublicNetwork(ip, port))
 	}
 	fmt.Println()
 }

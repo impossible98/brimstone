@@ -1,9 +1,13 @@
 TAG := $(shell date +"%Y-%m-%d-%H-%M-%S")
 
-build:
+build: lint
 	go build -ldflags '-s -w' -o dist/brimstone main.go
 dev:
 	go run main.go
+fmt:
+	go fmt ./...
+lint: fmt
+	go vet ./...
 start:
 	./dist/brimstone
 # Docker
