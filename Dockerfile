@@ -8,6 +8,7 @@ COPY go.sum .
 
 RUN go mod download
 
+COPY internal internal/
 COPY main.go .
 
 ENV CGO_ENABLE=0
