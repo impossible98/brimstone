@@ -8,7 +8,10 @@ COPY go.sum .
 
 RUN go mod download
 
+COPY global global/
 COPY internal internal/
+COPY pkg pkg/
+COPY routes routes/
 COPY main.go .
 
 ENV CGO_ENABLE=0
@@ -22,7 +25,7 @@ WORKDIR /app/
 
 COPY --from=build /app/dist /app/
 
-EXPOSE 8080
+EXPOSE 18574
 
 ENV GIN_MODE=release
 
